@@ -19,8 +19,8 @@ struct monitor final {
   monitor& operator=(monitor const&) = default;
   monitor& operator=(monitor&&) = default;
 
-  auto get() -> c::GLFWmonitor * { return m_; }
-  auto get() const -> c::GLFWmonitor const * { return m_; }
+  c::GLFWmonitor * get() { return m_; }
+  c::GLFWmonitor const * get() const { return m_; }
 
   static monitor primary() noexcept {
     return monitor{detail::handle_glfw_error(
@@ -32,7 +32,7 @@ struct monitor final {
                                              "Couldn't find any monitors!");
     std::vector<monitor> monitors_;
     monitors_.reserve(count);
-    for (auto i = 0; i != count; ++i) {
+    for (int i = 0; i != count; ++i) {
       monitors_.emplace_back(monitor{m_array[i]});
     }
     return monitors_;
@@ -52,7 +52,7 @@ struct monitor final {
     auto vm_array = detail::handle_glfw_error(c::glfwGetVideoModes(m_, &count),
                                               "Couldn't find any video_modes!");
     std::vector<glfw::video_mode> vms_(count);
-    for (auto i = 0; i != count; ++i) {
+    for (int i = 0; i < count; ++i) {
       vms_.emplace_back(glfw::video_mode{vm_array + i});
     }
     return vms_;

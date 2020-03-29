@@ -38,8 +38,8 @@ struct window final {
     return !c::glfwWindowShouldClose(w.get());
   }
 
-  auto get() noexcept -> c::GLFWwindow * { return w.get(); }
-  auto get() const noexcept -> c::GLFWwindow const * { return w.get(); }
+  c::GLFWwindow * get() noexcept { return w.get(); }
+  c::GLFWwindow const * get() const noexcept { return w.get(); }
 
   bool enable_poll_events;
   bool enable_wait_events;
@@ -143,8 +143,7 @@ struct window final {
   }
 
   bool poll(event& e) noexcept {
-    auto b = q->pop(e);
-    return b;
+    return q->pop(e);
   }
 };
 

@@ -41,7 +41,7 @@ struct gamma_ramp final {
 
   explicit gamma_ramp(unsigned short size_) : data_(3 * size_) {}
   explicit gamma_ramp(c::GLFWgammaramp const* g) : data_(3 * g->size) {
-    for (auto i = 0; i != size(); ++i) {
+    for (unsigned short i = 0; i < size(); ++i) {
       *(data_.data() + i) = *(g->red + i);
       *(data_.data() + size() + i) = *(g->blue + i);
       *(data_.data() + 2 * size() + i) = *(g->green + i);

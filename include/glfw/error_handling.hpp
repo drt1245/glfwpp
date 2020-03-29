@@ -67,12 +67,12 @@ namespace glfw {
 namespace detail {
 
 /// Error handling helper for GLFW c functions
-auto handle_glfw_error(int value, const char * msg) -> void {
+void handle_glfw_error(int value, const char * msg) {
   if (value == GL_FALSE) { throw runtime_error(msg); }
 }
 
 /// Error handling helper for GLFW c functions
-template <class T> auto handle_glfw_error(T* ptr, const char * msg) -> T * {
+template <class T> T* handle_glfw_error(T* ptr, const char * msg) {
   if (!ptr) { throw runtime_error(msg); }
   return ptr;
 }
