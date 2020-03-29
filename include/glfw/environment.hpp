@@ -29,7 +29,7 @@ struct environment final {
     return v;
   }
 
-  static std::string version_string() { return c::glfwGetVersionString(); }
+  static const char * version_string() { return c::glfwGetVersionString(); }
 
   struct static_data {
     std::map<c::GLFWwindow*, event_queue> event_queues;

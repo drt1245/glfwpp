@@ -6,11 +6,11 @@
 namespace glfw {
 
 #ifndef GLFW_CXX_CUSTOM_ERROR_HANDLING
-[[noreturn]] inline void report_logic_error(std::string msg) {
+[[noreturn]] inline void report_logic_error(const char * msg) {
   throw logic_error(msg);
 }
 
-[[noreturn]] inline void report_runtime_error(std::string msg) {
+[[noreturn]] inline void report_runtime_error(const char * msg) {
   throw runtime_error(msg);
 }
 
@@ -67,12 +67,12 @@ namespace glfw {
 namespace detail {
 
 /// Error handling helper for GLFW c functions
-auto handle_glfw_error(int value, std::string msg) -> void {
+auto handle_glfw_error(int value, const char * msg) -> void {
   if (value == GL_FALSE) { throw runtime_error(msg); }
 }
 
 /// Error handling helper for GLFW c functions
-template <class T> auto handle_glfw_error(T* ptr, std::string msg) -> T * {
+template <class T> auto handle_glfw_error(T* ptr, const char * msg) -> T * {
   if (!ptr) { throw runtime_error(msg); }
   return ptr;
 }

@@ -60,7 +60,8 @@ struct window final {
     auto v = c::glfwGetWindowAttrib(
      w.get(), static_cast<std::underlying_type_t<window_attribute>>(a));
     if (v == 0) {
-      report_runtime_error("Couldn't get attribute " + to_string(a) + ".");
+      std::string msg = std::string{"Couldn't get attribute "} + to_string(a) + ".";
+      report_runtime_error(msg.c_str());
     }
     return v;
   }

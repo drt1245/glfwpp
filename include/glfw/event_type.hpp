@@ -28,7 +28,7 @@ enum class event_type : int {
   window_restored,           //
 };
 
-std::string to_string(event_type e) {
+const char * to_string(event_type e) {
   switch (e) {
     case event_type::key_pressed: {
       return "event_type::key_pressed";

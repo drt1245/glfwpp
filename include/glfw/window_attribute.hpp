@@ -34,7 +34,7 @@ enum class window_attribute : int {
   opengl_profile = GLFW_OPENGL_PROFILE                 //
 };
 
-std::string to_string(window_attribute i) {
+const char * to_string(window_attribute i) {
   switch (i) {
     case window_attribute::resizable: {
       return "window_attribute::resizable";

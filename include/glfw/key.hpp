@@ -128,7 +128,7 @@ enum class key : int {
   MENU = GLFW_KEY_MENU
 };
 
-std::string to_string(const key v) {
+const char * to_string(const key v) {
   switch (v) {
     case key::UNKNOWN: {
       return "key::UNKNOWN";

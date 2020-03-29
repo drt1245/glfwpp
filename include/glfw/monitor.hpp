@@ -42,7 +42,7 @@ struct monitor final {
     return glfw::video_mode{c::glfwGetVideoMode(m_)};
   }
 
-  std::string name() const noexcept {
+  const char * name() const noexcept {
     return detail::handle_glfw_error(c::glfwGetMonitorName(m_),
                                      "Couldn't get monitor name!");
   }
