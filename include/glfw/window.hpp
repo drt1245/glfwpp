@@ -12,10 +12,10 @@ namespace glfw {
 
 struct window final {
   window() : w{nullptr} {}
-  window(frame_size<int> s, std::string title,
+  window(frame_size<int> s, const char * const title,
          glfw::monitor m = glfw::monitor{}, window const& share = window{})
       : w{nullptr}, poll_events_{true}, wait_events_{false} {
-    w = c::glfwCreateWindow(s.width, s.height, title.c_str(), m.get(),
+    w = c::glfwCreateWindow(s.width, s.height, title, m.get(),
                             const_cast<c::GLFWwindow*>(share.get()));
     detail::handle_glfw_error(w, "Couldn't create window!");
     q = environment::register_window(w);
@@ -137,10 +137,6 @@ struct window final {
     return pos;
   }
 
-  void title(std::string new_title) noexcept {
-    assert_non_empty_window();
-    c::glfwSetWindowTitle(w, new_title.c_str());
-  }
   void title(const char* new_title) noexcept {
     assert_non_empty_window();
     c::glfwSetWindowTitle(w, new_title);
