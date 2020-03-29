@@ -96,11 +96,9 @@ struct environment final {
 
   static void mouse_cursor_enter_callback(c::GLFWwindow* w, int entered) {
     event e;
-    if (entered == GL_TRUE) {
+    if (entered) {
       e.type = event_type::mouse_cursor_entered;
     } else {
-      assert(entered == GL_FALSE
-             && "logic error: entered is either GL_TRUE or GL_FALSE");
       e.type = event_type::mouse_cursor_left;
     }
     environment::data.event_queues[w].push(e);
@@ -158,9 +156,7 @@ struct environment final {
 
   static void window_focus_callback(c::GLFWwindow* w, int focused) {
     event e;
-    if (focused == GL_TRUE) { e.type = event_type::window_focused; } else {
-      assert(focused == GL_FALSE
-             && "logic error: entered is either GL_TRUE or GL_FALSE");
+    if (focused) { e.type = event_type::window_focused; } else {
       e.type = event_type::window_unfocused;
     }
     environment::data.event_queues[w].push(e);
@@ -168,9 +164,7 @@ struct environment final {
 
   static void window_minimize_callback(c::GLFWwindow* w, int iconified) {
     event e;
-    if (iconified == GL_TRUE) { e.type = event_type::window_minimized; } else {
-      assert(iconified == GL_FALSE
-             && "logic error: entered is either GL_TRUE or GL_FALSE");
+    if (iconified) { e.type = event_type::window_minimized; } else {
       e.type = event_type::window_restored;
     }
     environment::data.event_queues[w].push(e);

@@ -68,7 +68,7 @@ namespace detail {
 
 /// Error handling helper for GLFW c functions
 void handle_glfw_error(int value, const char * msg) {
-  if (value == GL_FALSE) { throw runtime_error(msg); }
+  if (!value) { throw runtime_error(msg); }
 }
 
 /// Error handling helper for GLFW c functions

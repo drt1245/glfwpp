@@ -15,6 +15,7 @@
 #include <glfw/environment.hpp>
 #include <glfw/exception.hpp>
 #include <glfw/monitor.hpp>
+
 #include <glfw/key.hpp>
 #include <glfw/gamma_ramp.hpp>
 #include <glfw/window.hpp>
