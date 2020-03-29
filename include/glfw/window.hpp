@@ -33,7 +33,9 @@ struct window final {
   window& operator=(window const&) = delete;
 
   explicit operator bool() {
-    assert_non_empty_window();
+    if(!w) {
+      return false;
+    }
     if (wait_events_) {
       wait_events();
     }
