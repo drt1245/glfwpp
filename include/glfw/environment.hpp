@@ -90,7 +90,7 @@ struct environment final {
                                              double y) {
     event e;
     e.type = event_type::mouse_cursor_moved;
-    e.mouse_position = frame_coordinates<double>{x, y};
+    e.mouse_position = glm::dvec2{x, y};
     environment::data.event_queues[w].push(e);
   }
 
@@ -109,7 +109,7 @@ struct environment final {
   static void mouse_scroll_callback(c::GLFWwindow* w, double x, double y) {
     event e;
     e.type = event_type::mouse_wheel_moved;
-    e.mouse_wheel_offset = frame_coordinates<double>{x, y};
+    e.mouse_wheel_offset = glm::dvec2{x, y};
     environment::data.event_queues[w].push(e);
   }
 
@@ -132,7 +132,7 @@ struct environment final {
   static void window_position_callback(c::GLFWwindow* w, int x, int y) {
     event e;
     e.type = event_type::window_moved;
-    e.window_position = frame_coordinates<int>{x, y};
+    e.window_position = glm::ivec2{x, y};
     environment::data.event_queues[w].push(e);
   }
 

@@ -3,7 +3,6 @@
 #include <glfw/config.hpp>
 #include <glfw/event_queue.hpp>
 #include <glfw/environment.hpp>
-#include <glfw/frame_coordinates.hpp>
 #include <glfw/monitor.hpp>
 #include <glfw/window_attribute.hpp>
 
@@ -97,12 +96,12 @@ struct window final {
     return s_;
   }
 
-  void position(frame_coordinates<int> p) noexcept {
+  void position(glm::ivec2 p) noexcept {
     c::glfwSetWindowPos(w.get(), p.x, p.y);
   }
 
-  frame_coordinates<int> position() const noexcept {
-    frame_coordinates<int> pos;
+  glm::ivec2 position() const noexcept {
+    glm::ivec2 pos;
     c::glfwGetWindowPos(w.get(), &pos.x, &pos.y);
     return pos;
   }
@@ -124,12 +123,12 @@ struct window final {
     c::glfwHideWindow(w.get());
   }
 
-  void mouse_position(frame_coordinates<double> p) noexcept {
+  void mouse_position(glm::dvec2 p) noexcept {
     c::glfwSetCursorPos(w.get(), p.x, p.y);
   }
 
-  frame_coordinates<double> mouse_position() const noexcept {
-    frame_coordinates<double> p;
+  glm::dvec2 mouse_position() const noexcept {
+    glm::dvec2 p;
     c::glfwGetCursorPos(w.get(), &p.x, &p.y);
     return p;
   }

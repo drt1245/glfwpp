@@ -2,7 +2,6 @@
 /// \file event.hpp Event
 #include <glfw/config.hpp>
 #include <glfw/event_type.hpp>
-#include <glfw/frame_coordinates.hpp>
 #include <glfw/key.hpp>
 #include <glfw/modifier_keys.hpp>
 #include <glfw/mouse_button.hpp>
@@ -30,10 +29,10 @@ struct event {
   union {
     key_t key;
     mouse_button_t mouse_button;
-    frame_coordinates<double> mouse_wheel_offset;
-    frame_coordinates<double> mouse_position;
+    glm::dvec2 mouse_wheel_offset;
+    glm::dvec2 mouse_position;
     glm::ivec2 window_frame_size;
-    frame_coordinates<int> window_position;
+    glm::ivec2 window_position;
     glm::ivec2 window_size;
     unsigned int character;
   };

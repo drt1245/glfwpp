@@ -3,10 +3,11 @@
 #include <string>
 #include <vector>
 #include <glfw/config.hpp>
-#include <glfw/frame_coordinates.hpp>
 #include <glfw/gamma_ramp.hpp>
 #include <glfw/error_handling.hpp>
 #include <glfw/video_mode.hpp>
+
+#include <glm/vec2.hpp>
 
 namespace glfw {
 
@@ -79,8 +80,8 @@ struct monitor final {
     return size;
   }
 
-  frame_coordinates<int> position() const {
-    frame_coordinates<int> pos;
+  glm::ivec2 position() const {
+    glm::ivec2 pos;
     c::glfwGetMonitorPos(m_, &pos.x, &pos.y);
     return pos;
   }
