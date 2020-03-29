@@ -13,7 +13,6 @@ namespace glfw {
 struct monitor final {
   explicit operator bool() { return m_ != nullptr; }
   explicit monitor(c::GLFWmonitor* m) : m_{m} {}
-  monitor() : m_{nullptr} {};
   monitor(monitor const&) = default;
   monitor(monitor&&) = default;
   monitor& operator=(monitor const&) = default;
@@ -48,7 +47,6 @@ struct monitor final {
   }
 
   std::vector<glfw::video_mode> video_modes() const noexcept {
-    assert(m_ && "video_modes requires a valid monitor");
     int count;
     auto vm_array = detail::handle_glfw_error(c::glfwGetVideoModes(m_, &count),
                                               "Couldn't find any video_modes!");

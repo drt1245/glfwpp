@@ -14,8 +14,8 @@ namespace glfw {
 
 struct window final {
   window(frame_size<int> s, const char * const title,
-         glfw::monitor m = glfw::monitor{}, window * share = nullptr)
-      : w{c::glfwCreateWindow(s.width, s.height, title, m.get(), share ? share->get() : nullptr), c::glfwDestroyWindow}, poll_events_{true}, wait_events_{false} {
+         glfw::monitor *mon = nullptr, window * share = nullptr)
+      : w{c::glfwCreateWindow(s.width, s.height, title, mon ? mon->get() : nullptr, share ? share->get() : nullptr), c::glfwDestroyWindow}, enable_poll_events{true}, enable_wait_events{false} {
     detail::handle_glfw_error(w.get(), "Couldn't create window!");
     q = environment::register_window(w.get());
     make_current();
@@ -30,10 +30,10 @@ struct window final {
   window& operator=(window const&) = delete;
 
   explicit operator bool() {
-    if (wait_events_) {
+    if (enable_wait_events) {
       wait_events();
     }
-    if (poll_events_) {
+    if (enable_poll_events) {
       poll_events();
     }
     return !c::glfwWindowShouldClose(w.get());
@@ -42,11 +42,12 @@ struct window final {
   auto get() noexcept -> c::GLFWwindow * { return w.get(); }
   auto get() const noexcept -> c::GLFWwindow const * { return w.get(); }
 
+  bool enable_poll_events;
+  bool enable_wait_events;
+
  private:
   std::unique_ptr<c::GLFWwindow, decltype(&c::glfwDestroyWindow)> w;
   event_queue* q;
-  bool poll_events_;
-  bool wait_events_;
 
  public:
   static void hint(window_attribute target, int hint) noexcept {
@@ -69,10 +70,7 @@ struct window final {
     c::glfwMakeContextCurrent(w.get());
   }
 
-  void set_wait_events(bool b) { wait_events_ = b; }
   void wait_events() const { c::glfwWaitEvents(); }
-
-  void set_poll_events(bool b) { poll_events_ = b; }
   void poll_events() const { c::glfwPollEvents(); }
 
   void on_close(c::GLFWwindowclosefun callback) const noexcept {
