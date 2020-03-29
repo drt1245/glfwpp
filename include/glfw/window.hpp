@@ -3,19 +3,19 @@
 #include <glfw/config.hpp>
 #include <glfw/event_queue.hpp>
 #include <glfw/environment.hpp>
-#include <glfw/frame_size.hpp>
 #include <glfw/frame_coordinates.hpp>
 #include <glfw/monitor.hpp>
 #include <glfw/window_attribute.hpp>
 
+#include <glm/vec2.hpp>
 #include <memory>
 
 namespace glfw {
 
 struct window final {
-  window(frame_size<int> s, const char * const title,
+  window(glm::ivec2 s, const char * const title,
          glfw::monitor *mon = nullptr, window * share = nullptr)
-      : w{c::glfwCreateWindow(s.width, s.height, title, mon ? mon->get() : nullptr, share ? share->get() : nullptr), c::glfwDestroyWindow}, enable_poll_events{true}, enable_wait_events{false} {
+      : w{c::glfwCreateWindow(s.x, s.y, title, mon ? mon->get() : nullptr, share ? share->get() : nullptr), c::glfwDestroyWindow}, enable_poll_events{true}, enable_wait_events{false} {
     detail::handle_glfw_error(w.get(), "Couldn't create window!");
     q = environment::register_window(w.get());
     make_current();
@@ -81,19 +81,19 @@ struct window final {
     c::glfwSwapBuffers(w.get());
   }
 
-  void resize(frame_size<int> s) noexcept {
-    c::glfwSetWindowSize(w.get(), s.width, s.height);
+  void resize(glm::ivec2 s) noexcept {
+    c::glfwSetWindowSize(w.get(), s.x, s.y);
   }
 
-  frame_size<int> size() const noexcept {
-    frame_size<int> s_;
-    c::glfwGetWindowSize(w.get(), &s_.width, &s_.height);
+  glm::ivec2 size() const noexcept {
+    glm::ivec2 s_;
+    c::glfwGetWindowSize(w.get(), &s_.x, &s_.y);
     return s_;
   }
 
-  frame_size<int> framebuffer_size() const noexcept {
-    frame_size<int> s_;
-    c::glfwGetFramebufferSize(w.get(), &s_.width, &s_.height);
+  glm::ivec2 framebuffer_size() const noexcept {
+    glm::ivec2 s_;
+    c::glfwGetFramebufferSize(w.get(), &s_.x, &s_.y);
     return s_;
   }
 

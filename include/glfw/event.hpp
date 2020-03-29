@@ -3,10 +3,11 @@
 #include <glfw/config.hpp>
 #include <glfw/event_type.hpp>
 #include <glfw/frame_coordinates.hpp>
-#include <glfw/frame_size.hpp>
 #include <glfw/key.hpp>
 #include <glfw/modifier_keys.hpp>
 #include <glfw/mouse_button.hpp>
+
+#include <glm/vec2.hpp>
 
 namespace glfw {
 
@@ -31,9 +32,9 @@ struct event {
     mouse_button_t mouse_button;
     frame_coordinates<double> mouse_wheel_offset;
     frame_coordinates<double> mouse_position;
-    frame_size<int> window_frame_size;
+    glm::ivec2 window_frame_size;
     frame_coordinates<int> window_position;
-    frame_size<int> window_size;
+    glm::ivec2 window_size;
     unsigned int character;
   };
 };

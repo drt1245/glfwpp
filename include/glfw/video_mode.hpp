@@ -2,7 +2,8 @@
 /// \file video_mode.hpp
 #include <glfw/config.hpp>
 #include <glfw/error_handling.hpp>
-#include <glfw/frame_size.hpp>
+
+#include <glm/vec2.hpp>
 
 namespace glfw {
 
@@ -13,7 +14,7 @@ struct video_mode final {
   int height() const noexcept { return v.height; }
   int width() const noexcept { return v.width; }
   int refresh_rate() const noexcept { return v.refreshRate; }
-  frame_size<int> size() const noexcept { return {width(), height()}; }
+  glm::ivec2 size() const noexcept { return {width(), height()}; }
 
   int& blue_bits() noexcept { return v.blueBits; }
   int& green_bits() noexcept { return v.greenBits; }
@@ -21,7 +22,6 @@ struct video_mode final {
   int& height() noexcept { return v.height; }
   int& width() noexcept { return v.width; }
   int& refresh_rate() noexcept { return v.refreshRate; }
-  frame_size<int&> size() noexcept { return {width(), height()}; }
 
   video_mode() {}
   explicit video_mode(c::GLFWvidmode const* other_ptr) {

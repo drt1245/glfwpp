@@ -124,7 +124,8 @@ struct environment final {
                                                 int height) {
     event e;
     e.type = event_type::window_frame_buffer_size;
-    e.window_frame_size = frame_size<int>{width, height};
+    e.window_frame_size.x = width;
+    e.window_frame_size.y = height;
     environment::data.event_queues[w].push(e);
   }
 
@@ -138,7 +139,8 @@ struct environment final {
   static void window_size_callback(c::GLFWwindow* w, int width, int height) {
     event e;
     e.type = event_type::window_resized;
-    e.window_size = frame_size<int>{width, height};
+    e.window_size.x = width;
+    e.window_size.y = height;
     environment::data.event_queues[w].push(e);
   }
 

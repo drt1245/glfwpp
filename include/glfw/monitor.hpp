@@ -73,9 +73,9 @@ struct monitor final {
     c::glfwSetGammaRamp(m_, &g);
   }
 
-  frame_size<int> physical_size() const {
-    frame_size<int> size;
-    c::glfwGetMonitorPhysicalSize(m_, &size.width, &size.height);
+  glm::ivec2 physical_size() const {
+    glm::ivec2 size;
+    c::glfwGetMonitorPhysicalSize(m_, &size.x, &size.y);
     return size;
   }
 
